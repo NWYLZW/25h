@@ -31,10 +31,8 @@ export function GridFor25H({
         + (i === index ? ' selected' : '')
         + (cards[i]?.content.trim() ? '' : ' empty')
       }
-      onClick={() => {
-        setIndex(i)
-      }}
-      onDoubleClick={() => setIndex(-1)}
+      onClick={() => size === 'large' && setIndex(i)}
+      onDoubleClick={() => size === 'large' && setIndex(-1)}
     >
       <img src={Close}
            alt='Close'
