@@ -1,4 +1,4 @@
-import './App.css'
+import './App.scss'
 
 import { useState } from 'react'
 
@@ -9,7 +9,16 @@ export default function App() {
   const [index, setIndex] = useState(0)
 
   return <>
-    <h1>25H</h1>
+    <h1>
+      <a href='https://github.com/nwylzw/25h' target='_blank' rel='noreferrer'>
+        25H
+        <img src='https://github.githubassets.com/favicons/favicon.svg'
+             alt='GitHub 25H Repsitory'
+             width='28'
+             height='28'
+        />
+      </a>
+    </h1>
     <GridFor25H
       notNow={index === 0 ? undefined : new Date(Date.now() + index * 24 * 60 * 60 * 1000)}
       style={{ marginTop: 50 }}
