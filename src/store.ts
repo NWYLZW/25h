@@ -1,4 +1,4 @@
-import { useReducer } from 'react'
+import { useEffect, useReducer } from 'react'
 
 interface Store {
   [DateKey: string]: { content: string }[]
@@ -25,15 +25,25 @@ export function setGridData(dateKey: string, data: { content: string }[]) {
 export function useDateData(date = new Date()) {
   const dk = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`
 
-  return useReducer((
+  const [a, d] = useReducer((
     state: { content: string }[],
     action:
       | { type: 'set'; hour: number; data: { content: string } }
+      | { type: 'upd'; data: { content: string }[] }
   ) => {
-    const { hour, data } = action
     const newState = [...state]
-    newState[hour] = data
-    setGridData(dk, newState)
-    return newState
+    switch (action.type) {
+      case 'set':
+        newState[action.hour] = action.data
+        setGridData(dk, newState)
+        return newState
+      case 'upd':
+        setGridData(dk, action.data)
+        return action.data
+    }
   }, store[dk] ?? [])
+  useEffect(() => {
+    d({ type: 'upd', data: store[dk] ?? [] })
+  }, [dk])
+  return [a, d] as const
 }
