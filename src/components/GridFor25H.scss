@@ -4,7 +4,12 @@
   grid-template-columns: repeat(5, 100px);
   grid-template-rows: repeat(5, 100px);
   width: 500px;
-  margin-top: 64px;
+  &.small {
+    grid-template-columns: repeat(5, 20px);
+    grid-template-rows: repeat(5, 20px);
+    width: 100px;
+    > .hour-card > * { visibility: hidden }
+  }
   > .hour-card {
     --br: 6px;
 

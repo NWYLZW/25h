@@ -1,5 +1,6 @@
 import './GridFor25H.scss'
 
+import type { CSSProperties } from 'react'
 import { useState } from 'react'
 
 import Close from '../assets/close.svg'
@@ -7,10 +8,12 @@ import { useDateData } from '../store.ts'
 
 export function GridFor25H({
   notNow,
-  size = 'large'
+  size = 'large',
+  style
 }: {
   notNow?: Date
   size?: 'small' | 'large'
+  style?: CSSProperties
 }) {
   const now = notNow ? notNow : new Date()
   const hour = now.getHours()
@@ -18,11 +21,11 @@ export function GridFor25H({
   const [index, setIndex] = useState(-1)
   const [cards, dispatchNewCard] = useDateData(now)
 
-  return <div className='grid-for-25h'>
+  return <div className={`grid-for-25h ${size}`} style={style}>
     {[...Array(25)].map((_, i) => <div
       key={i}
       className={
-        `hour-card ${size}`
+        'hour-card'
         + (i === hour && !notNow ? ' now' : '')
         + (i === index ? ' selected' : '')
         + (cards[i]?.content.trim() ? '' : ' empty')
