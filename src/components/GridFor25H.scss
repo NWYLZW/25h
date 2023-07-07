@@ -72,10 +72,12 @@
       position: absolute;
       width: calc(100% - 10px);
       height: calc(100% - 50px);
-      border-radius: var(--br);
+      border-radius: var(--br) !important;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 
       cursor: default;
       &:hover > .close.icon { opacity: .8 }
+      ~ .hour-card { opacity: 0 }
       > .close.icon { opacity: .3 }
       > .hour { font-size: 40px }
       &.now > textarea {
