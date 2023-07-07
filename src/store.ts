@@ -22,18 +22,18 @@ export function setGridData(dateKey: string, data: { content: string }[]) {
   localStorage.setItem('store', JSON.stringify(store))
 }
 
-export function getNowData() {
-  const now = new Date()
-  const dateKey = `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}`
-  return store[dateKey] ?? []
-}
+export function useDateData(date = new Date()) {
+  const dk = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`
 
-export function useNowData() {
-  return useReducer((state: { content: string }[], action: { type: 'set'; hour: number; data: { content: string } }) => {
+  return useReducer((
+    state: { content: string }[],
+    action:
+      | { type: 'set'; hour: number; data: { content: string } }
+  ) => {
     const { hour, data } = action
     const newState = [...state]
     newState[hour] = data
-    setGridData(`${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate()}`, newState)
+    setGridData(dk, newState)
     return newState
-  }, getNowData())
+  }, store[dk] ?? [])
 }

@@ -3,14 +3,18 @@ import './GridFor25H.scss'
 import { useState } from 'react'
 
 import Close from '../assets/close.svg'
-import { useNowData } from '../store.ts'
+import { useDateData } from '../store.ts'
 
-export function GridFor25H() {
-  const now = new Date()
+export function GridFor25H({
+  notNow
+}: {
+  notNow?: Date
+}) {
+  const now = notNow ? notNow : new Date()
   const hour = now.getHours()
 
   const [index, setIndex] = useState(-1)
-  const [cards, dispatchNewCard] = useNowData()
+  const [cards, dispatchNewCard] = useDateData(now)
 
   return <div className='grid-for-25h'>
     {[...Array(25)].map((_, i) => <div
