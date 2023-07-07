@@ -33,16 +33,16 @@
     background-color: var(--component-bg-color);
     cursor: pointer;
     transition: .1s;
-    &:first-child {
+    &.hour-card:nth-of-type(1) {
       border-radius: var(--br) 0 0 0;
     }
-    &:nth-child(5) {
+    &.hour-card:nth-of-type(5) {
       border-radius: 0 var(--br) 0 0;
     }
-    &:nth-child(21) {
+    &.hour-card:nth-of-type(21) {
       border-radius: 0 0 0 var(--br);
     }
-    &:last-child {
+    &.hour-card:nth-of-type(25) {
       border-radius: 0 0 var(--br) 0;
     }
     &:hover {
