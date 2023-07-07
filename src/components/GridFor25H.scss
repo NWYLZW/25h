@@ -78,6 +78,9 @@
       &:hover > .close.icon { opacity: .8 }
       > .close.icon { opacity: .3 }
       > .hour { font-size: 40px }
+      &.now > textarea {
+        color: white;
+      }
       > textarea {
         resize: none;
         position: absolute;
