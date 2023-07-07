@@ -1,11 +1,18 @@
 import './GridFor25H.scss'
 
 import type { CSSProperties } from 'react'
-import { useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 
 import Close from '../assets/close.svg'
 import { useDateData } from '../store.ts'
-import { ymd } from '../utils.ts'
+import { notify, ymd } from '../utils.ts'
+
+const messages = [
+  '时间不知不觉又过去了，你干了啥？别忘了记下来。',
+  '点我，记得记录。',
+  '时间需要被记忆。',
+  '别忘了这个周期。'
+]
 
 export function GridFor25H({
   notNow,
@@ -16,11 +23,25 @@ export function GridFor25H({
   size?: 'small' | 'large'
   style?: CSSProperties
 }) {
-  const now = notNow ? notNow : new Date()
-  const hour = now.getHours()
+  const [now, setNow] = useState(notNow ? notNow : new Date())
+  const hour = useMemo(() => now.getHours(), [now])
 
   const [index, setIndex] = useState(-1)
   const [cards, dispatchNewCard] = useDateData(now)
+
+  useEffect(() => {
+    if (notNow) return
+
+    let i = setTimeout(function re() {
+      const now = new Date()
+      if (now.getHours() !== hour) {
+        notify('25H', messages[Math.floor(Math.random() * messages.length)])
+        setNow(now)
+      }
+      i = setTimeout(re, 1000 * (60 - new Date().getSeconds()))
+    }, 1000 * (60 - new Date().getSeconds()))
+    return () => clearTimeout(i)
+  }, [hour, notNow])
 
   return <div className={`grid-for-25h ${size}`} style={style}>
     {[...Array(25)].map((_, i) => <div
@@ -54,9 +75,7 @@ export function GridFor25H({
           })}
           onDoubleClick={e => e.stopPropagation()}
         />
-        : <div
-          className='content'
-        >
+        : <div className='content'>
           {cards[i]?.content}
         </div>}
       <div className='hour'>{i + 1}H</div>
