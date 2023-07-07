@@ -5,6 +5,7 @@ import { useState } from 'react'
 
 import Close from '../assets/close.svg'
 import { useDateData } from '../store.ts'
+import { ymd } from '../utils.ts'
 
 export function GridFor25H({
   notNow,
@@ -61,5 +62,8 @@ export function GridFor25H({
         </div>}
       <div className='hour'>{i + 1}H</div>
     </div>)}
+    <div className='title'>
+      {ymd(now)}
+    </div>
   </div>
 }
