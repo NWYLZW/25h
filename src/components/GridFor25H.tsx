@@ -52,6 +52,7 @@ export function GridFor25H({
             hour: i,
             data: { content: e.target.value }
           })}
+          onDoubleClick={e => e.stopPropagation()}
         />
         : <div
           className='content'
