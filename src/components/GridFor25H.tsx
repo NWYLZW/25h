@@ -6,9 +6,11 @@ import Close from '../assets/close.svg'
 import { useDateData } from '../store.ts'
 
 export function GridFor25H({
-  notNow
+  notNow,
+  size = 'large'
 }: {
   notNow?: Date
+  size?: 'small' | 'large'
 }) {
   const now = notNow ? notNow : new Date()
   const hour = now.getHours()
@@ -20,8 +22,8 @@ export function GridFor25H({
     {[...Array(25)].map((_, i) => <div
       key={i}
       className={
-        'hour-card'
-        + (i === hour ? ' now' : '')
+        `hour-card ${size}`
+        + (i === hour && !notNow ? ' now' : '')
         + (i === index ? ' selected' : '')
         + (cards[i]?.content.trim() ? '' : ' empty')
       }
