@@ -1,0 +1,28 @@
+html[theme-mode=dark] body {
+  --font-color: #eee;
+  --bg-color: #333;
+  --component-font-color: #fff;
+  --component-bg-color: #555;
+}
+
+body {
+  --font-color: #2A2A2A;
+  --bg-color: #F0F0F0;
+  --component-font-color: var(--font-color);
+  --component-bg-color: #E0E0E0;
+
+  position: relative;
+  margin: 0 auto;
+  height: 100vh;
+  color: var(--font-color);
+  background-color: var(--bg-color);
+
+  font-family: 'Roboto Mono', monospace;
+  transition: .3s;
+}
+@media screen and (max-width: 500px) {
+  body { width: 100vw; }
+}
+@media screen and (min-width: 500px) {
+  body { width: 500px; }
+}
