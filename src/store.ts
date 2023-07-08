@@ -53,11 +53,13 @@ export function setGridData(dateKey: string, data: DateData[]) {
   notifyStore(dateKey)
 }
 
+const EMPTY = [] as unknown[]
+
 export function useDateData(date = new Date()) {
   const dk = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`
 
   const subscribeStoreWrap = useCallback((lis: Function) => subscribeStore(dk, lis), [dk])
-  const dateData = useSyncExternalStore(subscribeStoreWrap, () => store[dk] ?? [])
+  const dateData = useSyncExternalStore(subscribeStoreWrap, () => store[dk] ?? EMPTY)
 
   const [a, d] = useReducer((
     state: DateData[],
