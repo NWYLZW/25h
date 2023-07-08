@@ -115,6 +115,8 @@
     > pre.content {
       margin: 0;
       overflow: hidden;
+      word-break: break-all;
+      white-space: pre-wrap;
       text-overflow: ellipsis;
       display: -webkit-box;
       -webkit-line-clamp: 5;
