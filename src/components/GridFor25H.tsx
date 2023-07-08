@@ -67,7 +67,7 @@ export function GridFor25H({
         'hour-card overlay'
         + (index !== -1 ? ' selected' : '')
         + (index === hour && !notNow ? ' now' : '')
-        + (cards[index]?.content.trim() ? '' : ' empty')
+        + (index !== -1 && !cards[index]?.content.trim() ? ' empty' : '')
       }
       onDoubleClick={() => size === 'large' && setIndex(-1)}
       style={{

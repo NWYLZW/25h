@@ -5,7 +5,6 @@
     width: 88px;
     height: 88px;
     transform: scale(2);
-    border-radius: 0 !important;
   }
   100% {
     top: 0;
@@ -13,7 +12,6 @@
     width: calc(100% - 10px);
     height: calc(100% - 50px);
     transform: scale(1);
-    border-radius: var(--br);
   }
 }
 
@@ -95,7 +93,7 @@
         opacity: 1;
         width: calc(100% - 10px);
         height: calc(100% - 50px);
-        animation: full 1s;
+        animation: full .8s ease;
       }
     }
     &.selected {
