@@ -20,7 +20,7 @@ export default function App() {
       </a>
     </h1>
     <div className='tags'>
-      {['😴 睡觉', '🍚 吃饭', '⌨️ 打工'].map(k => <span
+      {['😴 睡觉', '🍚 吃饭', '⌨️ 打工', '🎮 电动'].map(k => <span
         key={k}
         className='tag'
         draggable
