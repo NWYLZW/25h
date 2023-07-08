@@ -91,6 +91,10 @@ export function GridFor25H({
           data: { content: e.target.value }
         })}
         onDoubleClick={e => e.stopPropagation()}
+        onKeyUp={e => {
+          // esc
+          if (e.keyCode === 27) { setIndex(-1) }
+        }}
       />
       <div className='hour'>{index + 1}H</div>
     </div>
