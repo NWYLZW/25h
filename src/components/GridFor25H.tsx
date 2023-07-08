@@ -52,37 +52,48 @@ export function GridFor25H({
       className={
         'hour-card'
         + (i === hour && !notNow ? ' now' : '')
-        + (i === index ? ' selected' : '')
         + (cards[i]?.content.trim() ? '' : ' empty')
       }
       onClick={() => size === 'large' && setIndex(i)}
+    >
+      <pre className='content'>
+        {cards[i]?.content}
+      </pre>
+      <div className='hour'>{i + 1}H</div>
+    </div>)}
+    <div
+      key={index}
+      className={
+        'hour-card overlay'
+        + (index !== -1 ? ' selected' : '')
+        + (index === hour && !notNow ? ' now' : '')
+        + (cards[index]?.content.trim() ? '' : ' empty')
+      }
       onDoubleClick={() => size === 'large' && setIndex(-1)}
+      style={{
+        // @ts-ignore
+        '--start-top': Math.floor(index / 5) * 20 + '%',
+        '--start-left': (index % 5) * 20 + '%'
+      }}
     >
       <img src={Close}
            alt='Close'
            className='close icon'
-           onClick={e => (
-             setIndex(-1),
-             e.stopPropagation()
-           )}
+           onClick={e => (setIndex(-1), e.stopPropagation())}
       />
-      {index === i
-        ? <textarea
-          className='content'
-          autoFocus
-          value={cards[i]?.content}
-          onChange={e => dispatchNewCard({
-            type: 'set',
-            hour: i,
-            data: { content: e.target.value }
-          })}
-          onDoubleClick={e => e.stopPropagation()}
-        />
-        : <pre className='content'>
-          {cards[i]?.content}
-        </pre>}
-      <div className='hour'>{i + 1}H</div>
-    </div>)}
+      <textarea
+        className='content'
+        autoFocus
+        value={cards[index]?.content}
+        onChange={e => dispatchNewCard({
+          type: 'set',
+          hour: index,
+          data: { content: e.target.value }
+        })}
+        onDoubleClick={e => e.stopPropagation()}
+      />
+      <div className='hour'>{index + 1}H</div>
+    </div>
     <div className='title'>
       {ymd(now)}
     </div>

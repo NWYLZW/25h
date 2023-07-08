@@ -1,3 +1,22 @@
+@keyframes full {
+  0% {
+    top: calc(var(--start-top) - 32px);
+    left: var(--start-left);
+    width: 88px;
+    height: 88px;
+    transform: scale(2);
+    border-radius: 0 !important;
+  }
+  100% {
+    top: 0;
+    left: 0;
+    width: calc(100% - 10px);
+    height: calc(100% - 50px);
+    transform: scale(1);
+    border-radius: var(--br);
+  }
+}
+
 .grid-for-25h {
   position: relative;
   display: grid;
@@ -67,11 +86,20 @@
         background-color: #1F432B;
       }
     }
+    &.overlay {
+      visibility: hidden;
+      opacity: 0;
+      position: absolute;
+      &.selected {
+        visibility: visible;
+        opacity: 1;
+        width: calc(100% - 10px);
+        height: calc(100% - 50px);
+        animation: full .5s;
+      }
+    }
     &.selected {
       z-index: 1;
-      position: absolute;
-      width: calc(100% - 10px);
-      height: calc(100% - 50px);
       border-radius: var(--br) !important;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 
@@ -79,7 +107,6 @@
       &:hover > .close.icon { opacity: .8 }
       ~ .hour-card { opacity: 0 }
       > .close.icon { opacity: .3 }
-      > .hour { font-size: 40px }
       &.now > textarea {
         color: white;
       }
