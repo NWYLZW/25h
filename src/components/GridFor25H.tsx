@@ -78,9 +78,9 @@ export function GridFor25H({
           })}
           onDoubleClick={e => e.stopPropagation()}
         />
-        : <div className='content'>
+        : <pre className='content'>
           {cards[i]?.content}
-        </div>}
+        </pre>}
       <div className='hour'>{i + 1}H</div>
     </div>)}
     <div className='title'>
