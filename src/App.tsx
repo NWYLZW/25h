@@ -19,6 +19,22 @@ export default function App() {
         />
       </a>
     </h1>
+    <div className='tags'>
+      {['😴 睡觉', '🍚 吃饭', '⌨️ 打工'].map(k => <span
+        key={k}
+        className='tag'
+        draggable
+        title={k}
+        onDragStart={e => {
+          e.dataTransfer.setData('text', JSON.stringify({
+            type: 'tag',
+            content: k
+          }))
+        }}
+      >
+        {k.slice(0, 2)}
+      </span>)}
+    </div>
     <GridFor25H
       notNow={index === 0 ? undefined : new Date(Date.now() + index * 24 * 60 * 60 * 1000)}
       style={{ marginTop: 50 }}

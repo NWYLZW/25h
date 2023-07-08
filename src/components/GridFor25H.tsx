@@ -11,7 +11,8 @@ const messages = [
   '时间不知不觉又过去了，你干了啥？别忘了记下来。',
   '点我，记得记录。',
   '时间需要被记忆。',
-  '别忘了这个周期。'
+  '别忘了这个周期。',
+  '忆往昔。'
 ]
 
 export function GridFor25H({
@@ -53,29 +54,53 @@ export function GridFor25H({
       className={
         'hour-card'
         + (i === hour && !notNow ? ' now' : '')
-        + (cards[i]?.content.trim() ? '' : ' empty')
+        + (cards[i]?.content?.trim() ? '' : ' empty')
       }
       onClick={() => size === 'large' && setIndex(i)}
+      onDragOver={e => e.preventDefault()}
+      onDrop={e => {
+        const data = JSON.parse(e.dataTransfer.getData('text'))
+        if (data.type === 'tag') {
+          dispatchNewCard({
+            type: 'set', hour: i,
+            data: {
+              ...cards[i],
+              tags: [...(cards[i]?.tags ?? []), {
+                color: data.color,
+                content: data.content
+              }]
+            }
+          })
+        }
+      }}
     >
       <pre className='content'>
         {cards[i]?.content}
       </pre>
+      <div className='tags'>
+        {cards[i]?.tags?.map(tag => <div
+          key={tag.content}
+          className='tag'
+        >
+          {tag.content?.slice(0, 2)}
+        </div>)}
+      </div>
       <div className='hour'>{i + 1}H</div>
     </div>)}
     <div
       key={index}
-      className={
-        'hour-card overlay'
-        + (index !== -1 ? ' selected' : '')
-        + (index === hour && !notNow ? ' now' : '')
-        + (index !== -1 && !cards[index]?.content.trim() ? ' empty' : '')
-      }
-      onDoubleClick={() => size === 'large' && setIndex(-1)}
       style={{
         // @ts-ignore
         '--start-top': Math.floor(index / 5) * 20 + '%',
         '--start-left': (index % 5) * 20 + '%'
       }}
+      className={
+        'hour-card overlay'
+        + (index !== -1 ? ' selected' : '')
+        + (index === hour && !notNow ? ' now' : '')
+        + (index !== -1 && !cards[index]?.content?.trim() ? ' empty' : '')
+      }
+      onDoubleClick={() => size === 'large' && setIndex(-1)}
     >
       <img src={Close}
            alt='Close'
@@ -89,7 +114,7 @@ export function GridFor25H({
         onChange={e => dispatchNewCard({
           type: 'set',
           hour: index,
-          data: { content: e.target.value }
+          data: { ...cards[index], content: e.target.value }
         })}
         onDoubleClick={e => e.stopPropagation()}
         onKeyUp={e => {
@@ -97,6 +122,22 @@ export function GridFor25H({
           if (e.keyCode === 27) { setIndex(-1) }
         }}
       />
+      <div className='tags'>
+        {cards[index]?.tags?.map(tag => <div
+          key={tag.content}
+          className='tag'
+        >
+          {tag.content}&nbsp;<span className='trash' onClick={() => {
+            dispatchNewCard({
+              type: 'set', hour: index,
+              data: {
+                ...cards[index],
+                tags: cards[index]?.tags?.filter(t => t !== tag)
+              }
+            })
+          }}>🗑️</span>
+        </div>)}
+      </div>
       <div className='hour'>{index + 1}H</div>
     </div>
     <div className='title'>

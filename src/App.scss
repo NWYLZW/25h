@@ -19,6 +19,24 @@
       }
     }
   }
+  > .tags {
+    position: absolute;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    top: 100px;
+    left: -50px;
+    > .tag {
+      padding: 4px 10px;
+      background-color: #ddd;
+      border-radius: 4px;
+      cursor: grab;
+      border: 1px solid #ccc;
+      box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+    }
+  }
 }
 
 button {

@@ -126,6 +126,27 @@
 
         font-size: 18px;
       }
+      > .tags {
+        left: 10px;
+        bottom: 10px;
+        > .tag {
+          padding: 2px 5px;
+          border-radius: 5px;
+          background-color: #00000080;
+          color: white;
+          font-size: 12px;
+          > .trash {
+            margin-left: 5px;
+            cursor: pointer;
+            opacity: .3;
+            transition: .2s;
+            &:hover {
+              opacity: .8;
+              text-shadow: 0 0 5px red;
+            }
+          }
+        }
+      }
     }
     > .close.icon {
       position: absolute;
@@ -158,6 +179,14 @@
       user-select: none;
       opacity: .3;
       transition: .1s;
+    }
+    > .tags {
+      position: absolute;
+      bottom: 5px;
+
+      display: flex;
+      align-items: center;
+      gap: 5px;
     }
   }
 }

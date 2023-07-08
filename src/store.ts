@@ -1,7 +1,12 @@
 import { useCallback, useEffect, useReducer, useSyncExternalStore } from 'react'
 
+interface DateData {
+  tags?: { content?: string, color?: string }[]
+  content?: string
+}
+
 interface Store {
-  [DateKey: string]: { content: string }[]
+  [DateKey: string]: DateData[]
 }
 
 export let store: Store
@@ -27,7 +32,7 @@ function subscribeStore(dk: string, listener: Function) {
 function notifyStore(dk: string) {
   const ls = listeners.get(dk)
   if (ls) {
-    ls.forEach(l => l(store[dk]))
+    ls.forEach(l => l())
   }
 }
 
@@ -42,7 +47,7 @@ try {
   }
 }
 
-export function setGridData(dateKey: string, data: { content: string }[]) {
+export function setGridData(dateKey: string, data: DateData[]) {
   store[dateKey] = data
   localStorage.setItem('store', JSON.stringify(store))
   notifyStore(dateKey)
@@ -55,10 +60,10 @@ export function useDateData(date = new Date()) {
   const dateData = useSyncExternalStore(subscribeStoreWrap, () => store[dk] ?? [])
 
   const [a, d] = useReducer((
-    state: { content: string }[],
+    state: DateData[],
     action:
-      | { type: 'set'; hour: number; data: { content: string } }
-      | { type: 'upd'; data: { content: string }[] }
+      | { type: 'set'; hour: number; data: DateData }
+      | { type: 'upd'; data: DateData[] }
   ) => {
     const newState = [...state]
     switch (action.type) {
