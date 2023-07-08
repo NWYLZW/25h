@@ -30,6 +30,9 @@ export function GridFor25H({
   const [cards, dispatchNewCard] = useDateData(now)
 
   useEffect(() => {
+    setNow(notNow ? notNow : new Date())
+  }, [notNow])
+  useEffect(() => {
     if (notNow) return
 
     let i = setTimeout(function re() {
