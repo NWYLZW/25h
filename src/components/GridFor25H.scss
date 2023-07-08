@@ -42,6 +42,8 @@
   }
   > .hour-card {
     --br: 6px;
+    --tr-x: 0;
+    --tr-y: 0;
 
     position: relative;
     padding: 5px;
@@ -56,6 +58,18 @@
     &.hour-card:nth-of-type(5) {
       border-radius: 0 var(--br) 0 0;
     }
+    &.hour-card:not(:nth-of-type(n + 6)) {
+      --tr-y: 40%;
+    }
+    &.hour-card:nth-of-type(5n) {
+      --tr-x: -40% !important;
+    }
+    &.hour-card:nth-of-type(5n + 1) {
+      --tr-x: 40% !important;
+    }
+    &.hour-card:nth-of-type(n + 21) {
+      --tr-y: -40%;
+    }
     &.hour-card:nth-of-type(21) {
       border-radius: 0 0 0 var(--br);
     }
@@ -69,7 +83,7 @@
     }
     &:not(.selected):hover {
       z-index: 1;
-      transform: scale(2);
+      transform: translate(var(--tr-x), var(--tr-y)) scale(1.8);
     }
     &.now {
       background-color: #377Dff;
