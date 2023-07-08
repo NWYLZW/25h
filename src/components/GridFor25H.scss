@@ -81,7 +81,13 @@
     &:not(.empty) {
       background-color: #6CD064;
       &.now {
-        background-color: #1F432B;
+        background-color: #438056;
+      }
+      html[theme-mode="dark"] & {
+        background-color: #438056;
+        &.now {
+          background-color: #1F432B;
+        }
       }
     }
     &.overlay {

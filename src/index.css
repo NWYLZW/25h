@@ -1,8 +1,8 @@
 html[theme-mode=dark] body {
   --font-color: #eee;
-  --bg-color: #333;
+  --bg-color: #222;
   --component-font-color: #fff;
-  --component-bg-color: #555;
+  --component-bg-color: #444;
 }
 
 body {
