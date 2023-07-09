@@ -18,8 +18,8 @@ function Tag({
   const [nk, setNK] = useState(tag.content ?? '')
   const [nca, setNCA] = useState<[string, string]>(
     Array.isArray(tag.color)
-      ? [tag.color[0] ?? '#333', tag.color[1] ?? '#888']
-      : [tag.color ?? '#333', '#888']
+      ? [tag.color[0] ?? '#555555', tag.color[1] ?? '#888888']
+      : [tag.color ?? '#555555', '#888888']
   )
 
   return <div className='tag-wrap'>
@@ -114,7 +114,7 @@ function Tags() {
 
   const [isEditing, setIsEditing] = useState(false)
   const [nk, setNK] = useState('')
-  const [nca, setNCA] = useState<[string, string]>(['#333', '#888'])
+  const [nca, setNCA] = useState<[string, string]>(['#555555', '#888888'])
 
   return <div className='tags'>
     {tags.map(tag => <Tag key={tag.content} data={tag} />)}
@@ -125,8 +125,8 @@ function Tags() {
       }
       style={{
         // @ts-ignore
-        '--l-color': '#eee',
-        '--d-color': '#eee'
+        '--l-color': nca[0],
+        '--d-color': nca[1]
       }}
       onClick={() => setIsEditing(true)}
     >
