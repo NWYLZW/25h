@@ -9,7 +9,7 @@ interface Store {
   [DateKey: string]: DateData[]
 }
 
-export let store: Store
+let store: Store
 
 const listeners: Map<string, Function[]> = new Map()
 
@@ -47,7 +47,7 @@ try {
   }
 }
 
-export function setGridData(dateKey: string, data: DateData[]) {
+function setGridData(dateKey: string, data: DateData[]) {
   store[dateKey] = data
   localStorage.setItem('store', JSON.stringify(store))
   notifyStore(dateKey)
