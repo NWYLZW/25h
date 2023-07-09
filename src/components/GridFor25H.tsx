@@ -126,6 +126,11 @@ export function GridFor25H({
         {cards[index]?.tags?.map(tag => <div
           key={tag.content}
           className='tag'
+          style={{
+            // @ts-ignore
+            '--l-color': (Array.isArray(tag.color) ? tag.color[0] : tag.color) || '#eee',
+            '--d-color': (Array.isArray(tag.color) ? tag.color[1] : tag.color) || '#eee'
+          }}
         >
           {tag.content}&nbsp;<span className='trash' onClick={() => {
             dispatchNewCard({

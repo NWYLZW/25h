@@ -88,6 +88,9 @@
     &.now {
       background-color: #377Dff;
       color: white;
+      html[theme-mode="dark"] & {
+        background-color: #2b5ebb;
+      }
       > .hour {
         opacity: .6;
       }
@@ -152,9 +155,13 @@
         > .tag {
           padding: 2px 5px;
           border-radius: 5px;
-          background-color: #00000080;
+          background-color: var(--l-color);
+          border: 1px solid #0005;
           color: white;
           font-size: 12px;
+          html[theme-mode="dark"] & {
+            background-color: var(--d-color);
+          }
           > .trash {
             margin-left: 5px;
             cursor: pointer;
