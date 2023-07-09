@@ -4,6 +4,76 @@ import { useState } from 'react'
 
 import { GridFor25H } from './components/GridFor25H.tsx'
 import { ThemeSwitcher } from './components/ThemeSwitcher.tsx'
+import { useTagsFromStore } from './TagStore.ts'
+
+function Tags() {
+  const [tags, setTags] = useTagsFromStore()
+
+  const [isEditing, setIsEditing] = useState(false)
+  const [nk, setNK] = useState('')
+  const [nc, setNC] = useState('#000')
+
+  return <div className='tags'>
+    {tags.map(tag => <span
+      key={tag.content}
+      className='tag'
+      style={{
+        // @ts-ignore
+        '--l-color': (Array.isArray(tag.color) ? tag.color[0] : tag.color) || '#eee',
+        '--d-color': (Array.isArray(tag.color) ? tag.color[1] : tag.color) || '#eee'
+      }}
+      draggable
+      title={tag.content}
+      onDragStart={e => {
+        e.dataTransfer.setData('text', JSON.stringify({
+          type: 'tag',
+          content: tag
+        }))
+      }}
+    >
+      {tag.content?.slice(0, 2)}
+    </span>)}
+    <span
+      className={
+        'tag add'
+        + (isEditing ? ' editing' : '')
+      }
+      style={{
+        // @ts-ignore
+        '--l-color': '#eee',
+        '--d-color': '#eee'
+      }}
+      onClick={() => setIsEditing(true)}
+    >
+      ➕
+      <input
+        type='text'
+        value={nk}
+        onBlur={() => setIsEditing(false)}
+        onChange={e => setNK(e.target.value)}
+        onKeyDown={e => {
+          if (e.key === 'Enter' && nk.trim()) {
+            setTags({
+              type: 'upd',
+              data: [...tags, {
+                content: nk,
+                color: nc
+              }]
+            })
+            setIsEditing(false)
+            setNK('')
+            setNC('#000')
+            ;(e.target as HTMLInputElement).blur()
+          }
+        }}
+      />
+      <input type='color'
+             value={nc}
+             onChange={e => setNC(e.target.value)}
+      />
+    </span>
+  </div>
+}
 
 export default function App() {
   const [index, setIndex] = useState(0)
@@ -19,22 +89,7 @@ export default function App() {
         />
       </a>
     </h1>
-    <div className='tags'>
-      {['😴 睡觉', '🍚 吃饭', '⌨️ 打工', '🎮 电动'].map(k => <span
-        key={k}
-        className='tag'
-        draggable
-        title={k}
-        onDragStart={e => {
-          e.dataTransfer.setData('text', JSON.stringify({
-            type: 'tag',
-            content: k
-          }))
-        }}
-      >
-        {k.slice(0, 2)}
-      </span>)}
-    </div>
+    <Tags />
     <GridFor25H
       notNow={index === 0 ? undefined : new Date(Date.now() + index * 24 * 60 * 60 * 1000)}
       style={{ marginTop: 50 }}

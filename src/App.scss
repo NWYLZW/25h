@@ -1,3 +1,63 @@
+@mixin tags {
+  > .tags {
+    position: absolute;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    top: 100px;
+    left: -50px;
+  }
+  > .tags > .tag {
+    padding: 4px 10px;
+    background-color: var(--l-color);
+    border-radius: 4px;
+    cursor: grab;
+    border: 1px solid #ccc;
+    opacity: .8;
+    transition: .3s;
+    html[theme-mode=dark] & {
+      border-color: var(--d-color);
+    }
+    &:not(.add):hover {
+      opacity: 1;
+      transform: scale(1.1);
+      box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+    }
+    &.add {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      position: absolute;
+      bottom: -36px;
+      right: 0;
+      width: 12px;
+
+      overflow: hidden;
+      cursor: pointer;
+      &.editing, &:hover {
+        width: 150px;
+      }
+      > input {
+        flex-grow: 1;
+        padding: 0;
+        width: 0;
+        height: 15px;
+        outline: none;
+        background-color: transparent;
+        border: none;
+        &[type=color] {
+          flex-grow: 0.15;
+          &::-webkit-color-swatch-wrapper {
+            padding: 2px 0 2px 2px;
+          }
+        }
+      }
+    }
+  }
+}
+
 #root {
   padding-top: 20px;
   > h1 { margin-top: 0 }
@@ -19,24 +79,7 @@
       }
     }
   }
-  > .tags {
-    position: absolute;
-
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-
-    top: 100px;
-    left: -50px;
-    > .tag {
-      padding: 4px 10px;
-      background-color: #ddd;
-      border-radius: 4px;
-      cursor: grab;
-      border: 1px solid #ccc;
-      box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
-    }
-  }
+  @include tags;
 }
 
 button {
