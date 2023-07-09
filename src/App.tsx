@@ -27,7 +27,8 @@ function Tags() {
       onDragStart={e => {
         e.dataTransfer.setData('text', JSON.stringify({
           type: 'tag',
-          content: tag
+          color: tag.color,
+          content: tag.content
         }))
       }}
     >
@@ -71,6 +72,7 @@ function Tags() {
              value={nc}
              onChange={e => setNC(e.target.value)}
       />
+      {/* TODO dark color edit support */}
     </span>
   </div>
 }
