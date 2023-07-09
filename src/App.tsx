@@ -13,7 +13,7 @@ function Tags() {
 
   const [isEditing, setIsEditing] = useState(false)
   const [nk, setNK] = useState('')
-  const [nc, setNC] = useState('#000')
+  const [nca, setNCA] = useState<[string, string]>(['#333', '#888'])
 
   return <div className='tags'>
     {tags.map(tag => <span
@@ -60,21 +60,25 @@ function Tags() {
               type: 'upd',
               data: [...tags, {
                 content: nk,
-                color: nc
+                color: nca
               }]
             })
             setIsEditing(false)
             setNK('')
-            setNC('#000')
+            setNCA(['#333', '#888'])
             ;(e.target as HTMLInputElement).blur()
           }
         }}
       />
-      <input type='color'
-             value={nc}
-             onChange={e => setNC(e.target.value)}
-      />
-      {/* TODO dark color edit support */}
+      {nca.map((c, i) => <input
+        key={i}
+        type='color'
+        value={c}
+        onChange={e => {
+          nca[i] = e.target.value
+          setNCA([...nca])
+        }}
+      />)}
     </span>
   </div>
 }

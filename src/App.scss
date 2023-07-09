@@ -18,7 +18,7 @@
     opacity: .8;
     transition: .3s;
     html[theme-mode=dark] & {
-      border-color: var(--d-color);
+      background-color: var(--d-color);
     }
     &:not(.add):hover {
       opacity: 1;
