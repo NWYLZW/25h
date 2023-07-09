@@ -4,7 +4,7 @@ import type { CSSProperties } from 'react'
 import { useEffect, useMemo, useState } from 'react'
 
 import Close from '../assets/close.svg'
-import { useDateData } from '../store.ts'
+import { useDateData } from '../DateStore.ts'
 import { notify, ymd } from '../utils.ts'
 
 const messages = [

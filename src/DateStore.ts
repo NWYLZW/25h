@@ -5,11 +5,11 @@ interface DateData {
   content?: string
 }
 
-interface Store {
+interface DateStore {
   [DateKey: string]: DateData[]
 }
 
-let store: Store
+let store: DateStore
 
 const listeners: Map<string, Function[]> = new Map()
 
