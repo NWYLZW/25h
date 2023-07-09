@@ -6,6 +6,8 @@ import { GridFor25H } from './components/GridFor25H.tsx'
 import { ThemeSwitcher } from './components/ThemeSwitcher.tsx'
 import { useTagsFromStore } from './TagStore.ts'
 
+// TODO Tag Component
+
 function Tags() {
   const [tags, setTags] = useTagsFromStore()
 
