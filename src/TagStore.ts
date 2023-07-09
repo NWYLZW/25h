@@ -36,7 +36,7 @@ try {
   ]))
 } catch (e) {
   if (confirm('Failed to load store from localStorage, clear it?')) {
-    localStorage.clear()
+    localStorage.removeItem(STORE_KEY)
     store = []
   } else {
     throw e

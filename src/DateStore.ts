@@ -40,7 +40,7 @@ try {
   store = JSON.parse(localStorage.getItem('store') ?? '{}')
 } catch (e) {
   if (confirm('Failed to load store from localStorage, clear it?')) {
-    localStorage.clear()
+    localStorage.removeItem('store')
     store = {}
   } else {
     throw e
