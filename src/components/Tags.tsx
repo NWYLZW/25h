@@ -1,3 +1,5 @@
+import './Tags.scss'
+
 import { useState } from 'react'
 
 import type { Tag as ITag } from '../TagStore.ts'
@@ -112,7 +114,7 @@ export function Tags() {
   const [nk, setNK] = useState('')
   const [nca, setNCA] = useState<[string, string]>(['#555555', '#888888'])
 
-  return <div className='tags'>
+  return <div className='tags' data-scoped='Component'>
     {tags.map(tag => <Tag key={tag.content} data={tag} />)}
     <div
       className={

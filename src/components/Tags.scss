@@ -1,0 +1,89 @@
+@mixin editable {
+  &.editing, &:hover {
+    opacity: 1;
+    visibility: visible;
+    width: 150px;
+  }
+  > input {
+    flex-grow: 1;
+    padding: 0;
+    width: 0;
+    height: 15px;
+    outline: none;
+    background-color: transparent;
+    border: none;
+    &[type=color] {
+      flex-grow: 0.15;
+      &::-webkit-color-swatch-wrapper {
+        padding: 2px 0 2px 2px;
+      }
+    }
+  }
+}
+
+.tags[data-scoped='Component'] {
+  position: absolute;
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  top: 100px;
+  left: -50px;
+  > .tag-wrap { position: relative }
+  > .tag,
+  > .tag-wrap > .tag {
+    padding: 4px 10px;
+    background-color: var(--l-color);
+    border-radius: 4px;
+    cursor: grab;
+    border: 1px solid #ccc;
+    opacity: .8;
+    transition: .3s;
+    html[theme-mode=dark] & {
+      background-color: var(--d-color);
+    }
+  }
+  > .tag,
+  > .tag-wrap > .tag {
+    position: relative;
+    &:not(.add):not(.cover):hover {
+      opacity: 1;
+      transform: scale(1.1);
+      box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+    }
+    &.add, &.cover {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      width: 12px;
+
+      overflow: hidden;
+      cursor: pointer;
+    }
+    &.add {
+      position: absolute;
+      bottom: -36px;
+      right: 0;
+
+      @include editable;
+    }
+    &.cover {
+      position: absolute;
+      top: 0;
+      right: 0;
+      opacity: 0;
+      visibility: hidden;
+
+      @include editable;
+      > .trash {
+        text-shadow: 0 0 4px red;
+        transition: .3s;
+        &:hover {
+          text-shadow: 0 0 8px red;
+          transform: scale(1.4);
+        }
+      }
+    }
+  }
+}
