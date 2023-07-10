@@ -5,13 +5,10 @@ import { useState } from 'react'
 import { GridFor25H } from './components/GridFor25H.tsx'
 import { Tags } from './components/Tags.tsx'
 import { ThemeSwitcher } from './components/ThemeSwitcher.tsx'
+import { Timeline } from './components/Timeline.tsx'
 
 export default function App() {
-  const now = Date.now()
-  const len = 7
-
   const [offset, setOffset] = useState(0)
-  const [index, setIndex] = useState(len - 1)
 
   return <>
     <h1>
@@ -29,42 +26,10 @@ export default function App() {
       notNow={offset === 0 ? undefined : new Date(Date.now() + offset * 24 * 60 * 60 * 1000)}
       style={{ marginTop: 50 }}
     />
-    <div style={{
-      display: 'flex',
-      justifyContent: 'space-between',
-      marginTop: '1rem'
-    }}>
-      <button onClick={() => {
-        if (index > len / 2)
-          setIndex(index - 1)
-        setOffset(offset - 1)
-      }}>
-        prev
-      </button>
-      {offset < 0 ? <button onClick={() => {
-        if (index > len / 2)
-          setIndex(index + 1)
-        setOffset(offset + 1)
-      }}>
-        next
-      </button> : null}
-    </div>
-    <div
-      className='timeline'
-      style={{
-        // @ts-ignore
-        '--card-size': `${100 / len}px`
-      }}
-      >
-      {[...Array(len)].map((_, i) => {
-        const d = offset + (i - index)
-        return d > 0 ? null : <GridFor25H
-          key={i}
-          notNow={new Date(now + d * 24 * 60 * 60 * 1000)}
-          className={i === index ? 'active' : ''}
-        />
-      })}
-    </div>
+    <Timeline
+      offset={offset}
+      onOffsetChange={setOffset}
+    />
     <ThemeSwitcher />
   </>
 }

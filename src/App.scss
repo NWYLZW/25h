@@ -19,45 +19,6 @@
       }
     }
   }
-  > .timeline {
-    --card-size: 20px;
-    --active-border-size: calc(var(--card-size) / 5);
-
-    display: flex;
-    align-items: start;
-    margin-top: 1rem;
-    > .grid-for-25h {
-      grid-template-columns: repeat(5, var(--card-size));
-      grid-template-rows: repeat(5, var(--card-size));
-      min-width: calc(5 * var(--card-size));
-      max-width: calc(5 * var(--card-size));
-      border-radius: 0;
-      margin: 0;
-      padding: 0;
-      &.active::after {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        box-sizing: border-box;
-        border: var(--active-border-size) solid #4A7BF755;
-        transition: .2s;
-      }
-      > .hour-card {
-        padding: 0;
-        cursor: default;
-        border: none;
-        border-radius: 0 !important;
-      }
-      > .hour-card > * { visibility: hidden }
-      > .hour-card:hover {
-        transform: none !important;
-      }
-      > .title { display: none }
-    }
-  }
 }
 
 button {
