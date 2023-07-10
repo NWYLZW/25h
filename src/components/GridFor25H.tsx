@@ -18,10 +18,12 @@ const messages = [
 export function GridFor25H({
   notNow,
   size = 'large',
+  className,
   style
 }: {
   notNow?: Date
   size?: 'small' | 'large'
+  className?: string
   style?: CSSProperties
 }) {
   const [now, setNow] = useState(notNow ? notNow : new Date())
@@ -48,7 +50,7 @@ export function GridFor25H({
     return () => clearTimeout(i)
   }, [hour, notNow])
 
-  return <div className={`grid-for-25h ${size}`} style={style}>
+  return <div className={`grid-for-25h ${size} ${className}`} style={style}>
     {[...Array(25)].map((_, i) => <div
       key={i}
       className={

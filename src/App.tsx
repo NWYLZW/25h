@@ -7,7 +7,11 @@ import { Tags } from './components/Tags.tsx'
 import { ThemeSwitcher } from './components/ThemeSwitcher.tsx'
 
 export default function App() {
-  const [index, setIndex] = useState(0)
+  const now = Date.now()
+  const len = 7
+
+  const [offset, setOffset] = useState(0)
+  const [index, setIndex] = useState(len - 1)
 
   return <>
     <h1>
@@ -22,7 +26,7 @@ export default function App() {
     </h1>
     <Tags />
     <GridFor25H
-      notNow={index === 0 ? undefined : new Date(Date.now() + index * 24 * 60 * 60 * 1000)}
+      notNow={offset === 0 ? undefined : new Date(Date.now() + offset * 24 * 60 * 60 * 1000)}
       style={{ marginTop: 50 }}
     />
     <div style={{
@@ -30,23 +34,36 @@ export default function App() {
       justifyContent: 'space-between',
       marginTop: '1rem'
     }}>
-      <button onClick={() => setIndex(index - 1)}>
+      <button onClick={() => {
+        if (index > len / 2)
+          setIndex(index - 1)
+        setOffset(offset - 1)
+      }}>
         prev
       </button>
-      {index < 0 ? <button onClick={() => setIndex(index + 1)}>
+      {offset < 0 ? <button onClick={() => {
+        if (index > len / 2)
+          setIndex(index + 1)
+        setOffset(offset + 1)
+      }}>
         next
       </button> : null}
     </div>
-    <div style={{
-      display: 'flex',
-      gap: 33.33,
-      marginTop: '1rem'
-    }}>
-      {[...Array(4)].map((_, i) => <GridFor25H
-        key={i}
-        notNow={new Date(Date.now() + (index + (i - 3)) * 24 * 60 * 60 * 1000)}
-        size='small'
-      />)}
+    <div
+      className='timeline'
+      style={{
+        // @ts-ignore
+        '--card-size': `${100 / len}px`
+      }}
+      >
+      {[...Array(len)].map((_, i) => {
+        const d = offset + (i - index)
+        return d > 0 ? null : <GridFor25H
+          key={i}
+          notNow={new Date(now + d * 24 * 60 * 60 * 1000)}
+          className={i === index ? 'active' : ''}
+        />
+      })}
     </div>
     <ThemeSwitcher />
   </>
