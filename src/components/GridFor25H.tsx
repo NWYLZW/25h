@@ -4,7 +4,7 @@ import type { CSSProperties } from 'react'
 import { useEffect, useMemo, useState } from 'react'
 
 import Close from '../assets/close.svg'
-import { useDateData } from '../DateStore.ts'
+import { useDateDataFromStore } from '../DateStore.ts'
 import { notify, ymd } from '../utils.ts'
 
 const messages = [
@@ -28,7 +28,7 @@ export function GridFor25H({
   const hour = useMemo(() => now.getHours(), [now])
 
   const [index, setIndex] = useState(-1)
-  const [cards, dispatchNewCard] = useDateData(now)
+  const [cards, dispatchNewCard] = useDateDataFromStore(now)
 
   useEffect(() => {
     setIndex(-1)

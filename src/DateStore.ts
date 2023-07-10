@@ -1,9 +1,13 @@
 import { useCallback, useEffect, useReducer, useSyncExternalStore } from 'react'
 
+import type { Tag } from './TagStore.ts'
+
 interface DateData {
-  tags?: { content?: string, color?: string }[]
+  tags?: Tag[]
   content?: string
 }
+
+const STORE_KEY = 'store'
 
 interface DateStore {
   [DateKey: string]: DateData[]
@@ -37,25 +41,25 @@ function notifyStore(dk: string) {
 }
 
 try {
-  store = JSON.parse(localStorage.getItem('store') ?? '{}')
+  store = JSON.parse(localStorage.getItem(STORE_KEY) ?? '{}')
 } catch (e) {
   if (confirm('Failed to load store from localStorage, clear it?')) {
-    localStorage.removeItem('store')
+    localStorage.removeItem(STORE_KEY)
     store = {}
   } else {
     throw e
   }
 }
 
-function setGridData(dateKey: string, data: DateData[]) {
+function setDateData(dateKey: string, data: DateData[]) {
   store[dateKey] = data
-  localStorage.setItem('store', JSON.stringify(store))
+  localStorage.setItem(STORE_KEY, JSON.stringify(store))
   notifyStore(dateKey)
 }
 
 const EMPTY = [] as unknown[]
 
-export function useDateData(date = new Date()) {
+export function useDateDataFromStore(date = new Date()) {
   const dk = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`
 
   const subscribeStoreWrap = useCallback((lis: Function) => subscribeStore(dk, lis), [dk])
@@ -71,10 +75,10 @@ export function useDateData(date = new Date()) {
     switch (action.type) {
       case 'set':
         newState[action.hour] = action.data
-        setGridData(dk, newState)
+        setDateData(dk, newState)
         return newState
       case 'upd':
-        setGridData(dk, action.data)
+        setDateData(dk, action.data)
         return action.data
     }
   }, dateData)
