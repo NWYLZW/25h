@@ -1,6 +1,6 @@
 import './Tags.scss'
 
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 
 import type { Tag as ITag } from '../TagStore.ts'
 import { useTagsFromStore } from '../TagStore.ts'
@@ -20,6 +20,8 @@ function Tag({
       : [tag.color ?? '#555555', '#888888']
   )
 
+  const lc = useMemo(() => (Array.isArray(tag.color) ? tag.color[0] : tag.color) || '#eee', [tag.color])
+  const dc = useMemo(() => (Array.isArray(tag.color) ? tag.color[1] : tag.color) || '#eee', [tag.color])
   return <div className='tag-wrap'>
     <div
       className={
@@ -28,8 +30,8 @@ function Tag({
       }
       style={{
         // @ts-ignore
-        '--l-color': (Array.isArray(tag.color) ? tag.color[0] : tag.color) || '#eee',
-        '--d-color': (Array.isArray(tag.color) ? tag.color[1] : tag.color) || '#eee'
+        '--l-color': lc,
+        '--d-color': dc
       }}
       draggable
       title={tag.content}
@@ -51,8 +53,10 @@ function Tag({
       }
       style={{
         // @ts-ignore
-        '--l-color': nca[0] || '#eee',
-        '--d-color': nca[1] || '#eee'
+        '--l-color': nca[0] || '#eeeeee',
+        '--d-color': nca[1] || '#eeeeee',
+        '--l-f-color': parseInt((nca[0] || '#eeeeee').slice(1), 16) < 0x888888 ? '#ffffff' : '#000000',
+        '--d-f-color': parseInt((nca[1] || '#eeeeee').slice(1), 16) < 0x888888 ? '#ffffff' : '#000000'
       }}
     >
       <span className='trash' onDoubleClick={() => {

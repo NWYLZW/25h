@@ -9,9 +9,13 @@
     padding: 0;
     width: 0;
     height: 15px;
+    color: var(--l-f-color);
     outline: none;
     background-color: transparent;
     border: none;
+    html[theme-mode=dark] & {
+      color: var(--d-f-color);
+    }
     &[type=color] {
       flex-grow: 0.15;
       &::-webkit-color-swatch-wrapper {
