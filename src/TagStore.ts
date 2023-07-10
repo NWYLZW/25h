@@ -52,7 +52,7 @@ function setTagData(data: Tag[]) {
 const EMPTY = [] as unknown[]
 
 export function useTagsFromStore() {
-  const dateData = useSyncExternalStore(subscribeStore, () => store ?? EMPTY)
+  const tags = useSyncExternalStore(subscribeStore, () => store ?? EMPTY)
 
   const [a, d] = useReducer((
     state: Tag[],
@@ -70,9 +70,9 @@ export function useTagsFromStore() {
         setTagData(action.data)
         return action.data
     }
-  }, dateData)
+  }, tags)
   useEffect(() => {
-    d({ type: 'upd', data: dateData })
-  }, [dateData])
+    d({ type: 'upd', data: tags })
+  }, [tags])
   return [a, d] as const
 }
