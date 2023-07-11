@@ -1,7 +1,5 @@
-import type { VercelRequest, VercelResponse } from '@vercel/node'
+import { defineJSONHandler } from './utils/defineHandler.ts'
 
-export default function handler(req: VercelRequest, res: VercelResponse) {
-  res.statusCode = 200
-  res.setHeader('Content-Type', 'application/json')
-  res.json({ name: 'John Doe' })
-}
+export default defineJSONHandler(function () {
+  return { name: 'John Doe' }
+})
