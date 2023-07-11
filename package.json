@@ -10,8 +10,7 @@
     "run:src": "vite",
     "run:svr": "ts-node svr/index.ts",
     "run:vercel": "yarn build:svr && yarn run:src",
-    "build": "yarn check && vite build && yarn build:svr",
-    "build:svr": "tsc --project svr/tsconfig.json"
+    "build": "yarn check && vite build"
   },
   "dependencies": {
     "koa": "^2.14.2",
