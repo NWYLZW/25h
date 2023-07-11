@@ -4,16 +4,23 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
+    "check": "tsc --noEmit",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+
+    "run:src": "vite",
+    "run:svr": "ts-node svr/index.ts",
+
+    "build": "yarn check && vite build"
   },
   "dependencies": {
+    "@vercel/node": "^2.15.4",
+    "koa": "^2.14.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
+    "@types/koa": "^2.13.6",
     "@types/react": "^18.2.14",
     "@types/react-dom": "^18.2.6",
     "@typescript-eslint/eslint-plugin": "^5.61.0",
@@ -26,7 +33,9 @@
     "eslint-plugin-simple-import-sort": "^10.0.0",
     "foxact": "^0.2.16",
     "sass": "^1.63.6",
+    "ts-node": "^10.9.1",
     "typescript": "^5.0.2",
     "vite": "^4.4.0"
-  }
+  },
+  "packageManager": "yarn@1.22.19"
 }

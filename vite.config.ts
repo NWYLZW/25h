@@ -3,6 +3,8 @@ import { defineConfig } from 'vite'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: '/25h/',
+  base: process.env.BASE === 'None'
+    ? ''
+    : (process.env.BASE ?? '/25h'),
   plugins: [react()]
 })

@@ -9,11 +9,6 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     'plugin:react-hooks/recommended'
   ],
-  ignorePatterns: [
-    'demo/public/*',
-    'demo/dist/*',
-    'pages/*'
-  ],
   overrides: [
     {
       plugins: ['react', '@typescript-eslint'],
