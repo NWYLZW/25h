@@ -766,6 +766,11 @@ chalk@^4.0.0:
   optionalDependencies:
     fsevents "~2.3.2"
 
+client-only@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.npmjs.org/client-only/-/client-only-0.0.1.tgz#38bba5d403c41ab150bff64a95c85013cf73bca1"
+  integrity sha512-IV3Ou0jSMzZrd3pZ48nLkT9DA7Ag1pnPzaiQhpW7c3RbcqqzvzzVu+L8gfqMp/8IM2MQtSiqaCxrrcfu8I8rMA==
+
 color-convert@^1.9.0:
   version "1.9.3"
   resolved "https://registry.npmjs.org/color-convert/-/color-convert-1.9.3.tgz#bb71850690e1f136567de629d2d5471deda4c1e8"
@@ -1182,6 +1187,14 @@ for-each@^0.3.3:
   integrity sha512-jqYfLp7mo9vIyQf8ykW2v7A+2N4QjeCeI5+Dz9XraiO1ign81wjiH7Fb9vSOWvQfNtmSa4H2RoQTrrXivdUZmw==
   dependencies:
     is-callable "^1.1.3"
+
+foxact@^0.2.16:
+  version "0.2.16"
+  resolved "https://registry.npmjs.org/foxact/-/foxact-0.2.16.tgz#a22c4f538ec0e3da7c5addc9e83f1299b7435a95"
+  integrity sha512-w2napR3EifMJmWETxZLM51LHT8qLMLC1sDizvOeOnS3ffMGBpYoBOHkocEOfCg+XJZVRSsNKzlraGcgofMzJPg==
+  dependencies:
+    client-only "^0.0.1"
+    server-only "^0.0.1"
 
 fs.realpath@^1.0.0:
   version "1.0.0"
@@ -1950,6 +1963,11 @@ semver@^7.3.7:
   integrity sha512-QBlUtyVk/5EeHbi7X0fw6liDZc7BBmEaSYn01fMU1OUYbf6GPsbTtd8WmnqbI20SeycoHSeiybkE/q1Q+qlThQ==
   dependencies:
     lru-cache "^6.0.0"
+
+server-only@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.npmjs.org/server-only/-/server-only-0.0.1.tgz#0f366bb6afb618c37c9255a314535dc412cd1c9e"
+  integrity sha512-qepMx2JxAa5jjfzxG79yPPq+8BuFToHd1hm7kI+Z4zAq1ftQiP7HcxMhDDItrbtwVeLg/cY2JnKnrcFkmiswNA==
 
 shebang-command@^2.0.0:
   version "2.0.0"
