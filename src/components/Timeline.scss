@@ -1,10 +1,17 @@
+.timeline-operate {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+}
+input[type=range].slider.timeline {
+  margin-top: 1rem;
+}
 .timeline {
   --card-size: 20px;
   --active-border-size: calc(var(--card-size) / 5);
 
   display: flex;
   align-items: start;
-  margin-top: 1rem;
   > .grid-for-25h {
     grid-template-columns: repeat(5, var(--card-size));
     grid-template-rows: repeat(5, var(--card-size));
