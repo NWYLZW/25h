@@ -36,7 +36,7 @@ export function Timeline({
         prev
       </button>
       {offset < 0 ? <button onClick={() => {
-        if (index > len / 2)
+        if (-offset < Math.floor(len / 2))
           setIndex(index + 1)
         changeOffset(offset + 1)
       }}>
