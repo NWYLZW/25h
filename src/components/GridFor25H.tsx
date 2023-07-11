@@ -17,12 +17,12 @@ const messages = [
 
 export function GridFor25H({
   notNow,
-  size = 'large',
+  disabled = false,
   className,
   style
 }: {
   notNow?: Date
-  size?: 'small' | 'large'
+  disabled?: boolean
   className?: string
   style?: CSSProperties
 }) {
@@ -50,7 +50,7 @@ export function GridFor25H({
     return () => clearTimeout(i)
   }, [hour, notNow])
 
-  return <div className={`grid-for-25h ${size} ${className}`} style={style}>
+  return <div className={`grid-for-25h ${className}`} style={style}>
     {[...Array(25)].map((_, i) => <div
       key={i}
       className={
@@ -58,9 +58,11 @@ export function GridFor25H({
         + (i === hour && !notNow ? ' now' : '')
         + (cards[i]?.content?.trim() ? '' : ' empty')
       }
-      onClick={() => size === 'large' && setIndex(i)}
+      onClick={() => !disabled && setIndex(i)}
       onDragOver={e => e.preventDefault()}
       onDrop={e => {
+        if (disabled) return
+
         const data = JSON.parse(e.dataTransfer.getData('text'))
         if (data.type === 'tag') {
           dispatchNewCard({
@@ -102,7 +104,7 @@ export function GridFor25H({
         + (index === hour && !notNow ? ' now' : '')
         + (index !== -1 && !cards[index]?.content?.trim() ? ' empty' : '')
       }
-      onDoubleClick={() => size === 'large' && setIndex(-1)}
+      onDoubleClick={() => !disabled && setIndex(-1)}
     >
       <img src={Close}
            alt='Close'

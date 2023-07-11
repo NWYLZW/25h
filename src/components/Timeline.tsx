@@ -49,6 +49,7 @@ export function Timeline(props: {
         const d = offset + (i - index)
         return d > 0 ? null : <GridFor25H
           key={i}
+          disabled
           notNow={new Date(now + d * 24 * 60 * 60 * 1000)}
           className={i === index ? 'active' : ''}
         />
