@@ -1,6 +1,6 @@
 import { Redis } from '@upstash/redis'
 
-import { defineJSONHandler } from '../svr/utils/defineHandler'
+import { defineJSONHandler } from './utils/defineHandler'
 
 const redis = new Redis({
   url: process.env.UPSTASH_REDIS_REST_URL as string,
