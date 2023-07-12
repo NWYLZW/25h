@@ -4,7 +4,7 @@ interface Handler {
   (req: VercelRequest, res: VercelResponse): void | Promise<void>
 }
 
-export default function defineHandler(handler: Handler) {
+export default function _defineHandler(handler: Handler) {
   return handler
 }
 
@@ -33,7 +33,7 @@ export function defineJSONHandler<
   B = unknown,
   T = unknown
 >(handler: JSONRespHandler<Q, B, T>) {
-  return defineHandler(async (req, res) => {
+  return _defineHandler(async (req, res) => {
     res.setHeader('Content-Type', 'application/json')
     try {
       // @ts-ignore
