@@ -1,0 +1,17 @@
+POST {{baseURL}}/hash
+Content-Type: application/json
+
+{
+  "username": "{{username}}",
+  "password": "{{password}}"
+}
+
+###
+
+GET {{baseURL}}/counter
+
+> {%
+  console.log('status:', status)
+%}
+
+###
