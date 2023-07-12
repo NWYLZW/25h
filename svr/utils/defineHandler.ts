@@ -15,7 +15,7 @@ export interface JSONRespHandler<
 > {
   (
     req:
-      & VercelRequest
+      & Omit<VercelRequest, 'query' | 'body'>
       & { query: Q }
       & { body: B },
     res: VercelResponse
