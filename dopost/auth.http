@@ -11,7 +11,7 @@ Content-Type: application/json
 GET {{baseURL}}/counter
 
 > {%
-  console.log('status:', status)
+  client.log('counter value: ' + (/** @type {{ c: number }} */ response.body).c)
 %}
 
 ###
