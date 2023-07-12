@@ -49,7 +49,8 @@ export async function verifyAuth(req: VercelRequest) {
 export async function setUserCookie(
   res: VercelResponse,
   pay?: Omit<UserJwtPayload, 'iat' | 'jti'>,
-  expires = 60 * 60 * 24 * 7 // 1 week
+  // 1 week
+  expires = Date.now() + 60 * 60 * 24 * 7 * 1000
 ) {
   const signJWT = new SignJWT(pay ?? {})
     .setProtectedHeader({ alg: 'HS256' })
