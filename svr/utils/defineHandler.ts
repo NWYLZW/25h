@@ -38,7 +38,11 @@ export function defineJSONHandler<
     try {
       // @ts-ignore
       const resp = await handler(req, res)
-      res.statusCode = 200
+      if (resp === undefined) {
+        res.statusCode = 204
+      } else {
+        res.statusCode = 200
+      }
       res.json(resp)
     } catch (e) {
       console.error(e)
