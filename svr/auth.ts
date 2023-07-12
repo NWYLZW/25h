@@ -10,6 +10,7 @@ interface UserJwtPayload {
   jti: string
   iat: number
   user: {
+    id: string
     name: string
   }
 }
