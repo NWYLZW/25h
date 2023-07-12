@@ -18,7 +18,10 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "paths": {
+      "#svr/*": ["./svr/*"],
+    }
   },
   "include": ["src", "svr", "api"],
   "references": [{ "path": "./tsconfig.node.json" }]
