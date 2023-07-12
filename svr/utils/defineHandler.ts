@@ -1,6 +1,6 @@
 import type { VercelRequest, VercelRequestQuery, VercelResponse } from '@vercel/node'
 
-interface Handler {
+export interface Handler {
   (req: VercelRequest, res: VercelResponse): void | Promise<void>
 }
 
@@ -8,7 +8,7 @@ export default function defineHandler(handler: Handler) {
   return handler
 }
 
-interface JSONRespHandler<
+export interface JSONRespHandler<
   Q extends VercelRequestQuery,
   B,
   T
