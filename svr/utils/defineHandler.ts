@@ -1,7 +1,7 @@
 import type { VercelRequest, VercelRequestQuery, VercelResponse } from '@vercel/node'
 
 export interface Handler {
-  (req: VercelRequest, res: VercelResponse): void | Promise<void>
+  (req: VercelRequest, res: VercelResponse): any | Promise<any>
 }
 
 export default function defineHandler(handler: Handler) {
@@ -11,13 +11,15 @@ export default function defineHandler(handler: Handler) {
 export interface JSONRespHandler<
   Q extends VercelRequestQuery,
   B,
-  T
+  T,
+  E
 > {
   (
     req:
       & Omit<VercelRequest, 'query' | 'body'>
       & { query: Q }
-      & { body: B },
+      & { body: B }
+      & { extra: E },
     res: VercelResponse
   ): T | Promise<T>
 }
@@ -31,8 +33,9 @@ export class HTTPError extends Error {
 export function defineJSONHandler<
   Q extends VercelRequestQuery = VercelRequestQuery,
   B = unknown,
-  T = unknown
->(handler: JSONRespHandler<Q, B, T>) {
+  T = unknown,
+  E = unknown
+>(handler: JSONRespHandler<Q, B, T, E>) {
   return defineHandler(async (req, res) => {
     res.setHeader('Content-Type', 'application/json')
     try {
