@@ -1,9 +1,9 @@
-import { defineJSONHandler } from '#svr/utils/defineHandler.js'
+import { requireAuth } from '#svr/auth.js'
 import { getRedis } from '#svr/utils/getRedis.js'
 
 const redis = getRedis()
 
-export default defineJSONHandler<{ isReset: string }>(async ({ query }) => {
+export default requireAuth<{ isReset: string }>(async ({ query }) => {
   const isReset = ['true', '1', ''].includes(query.isReset)
 
   if (isReset) {
