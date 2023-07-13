@@ -37,6 +37,9 @@
     "typescript": "^5.0.2",
     "vite": "^4.4.0"
   },
+  "resolutions": {
+    "@vercel/node/**/typescript": "^5.0.2"
+  },
   "imports": {
     "#svr/*": "./svr/*"
   },
