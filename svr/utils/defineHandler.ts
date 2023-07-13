@@ -36,8 +36,11 @@ export function defineJSONHandler<
   return defineHandler(async (req, res) => {
     res.setHeader('Content-Type', 'application/json')
     try {
-      // @ts-ignore
-      const resp = await handler(req, res)
+      const resp = await handler(
+        // @ts-ignore
+        req,
+        res
+      )
       if (resp === undefined) {
         res.statusCode = 204
       } else {
