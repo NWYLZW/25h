@@ -7,7 +7,9 @@ Content-Type: application/json
 }
 
 > {%
-  client.assert(response.status === 204, 'status is 204')
+  client.test('status is 204', () => {
+    client.assert(response.status === 204, 'status is 200')
+  })
 %}
 
 ###
@@ -17,7 +19,9 @@ GET {{baseURL}}/counter
 > {%
   const body = /** @type {{ c: number }} */ response.body
   client.log('counter value: ' + body.c)
-  client.assert(response.status === 200, 'status is 200')
+  client.test('status is 200', () => {
+    client.assert(response.status === 200, 'status is 200')
+  })
 %}
 
 ###
@@ -26,7 +30,9 @@ GET {{baseURL}}/counter
 GET {{baseURL}}/counter
 
 > {%
-  client.assert(response.status === 401, 'status is 200')
+  client.test('status is 401', () => {
+    client.assert(response.status === 401, 'status is 401')
+  })
 %}
 
 ###
