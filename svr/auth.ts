@@ -1,10 +1,12 @@
 // Copy from https://github.com/vercel/examples/blob/aadce63d7693e4a2a56c08294f145b40338f033b/edge-middleware/jwt-authentication/lib/auth.ts
 import type { VercelRequest, VercelResponse } from '@vercel/node'
+import type { VercelRequestQuery } from '@vercel/node'
 import { jwtVerify, SignJWT } from 'jose'
 import { nanoid } from 'nanoid'
 
 import { getJwtSecretKey, USER_TOKEN } from './constants.js'
-import { HTTPError } from './utils/defineHandler.js'
+import type { JSONRespHandler } from './utils/defineHandler.js'
+import { defineJSONHandler, HTTPError } from './utils/defineHandler.js'
 
 interface UserJwtPayload {
   jti: string
@@ -70,4 +72,19 @@ export async function setUserCookie(
  */
 export function expireUserCookie(res: VercelResponse) {
   res.setHeader('Set-Cookie', `${USER_TOKEN}=; Path=/; HttpOnly; Max-Age=0; SameSite=Strict`)
+}
+
+export function requireAuth<
+  Q extends VercelRequestQuery,
+  B = unknown,
+  T = unknown,
+  E extends
+    { user: Awaited<ReturnType<typeof verifyAuth>> } =
+    { user: Awaited<ReturnType<typeof verifyAuth>> }
+>(handler: JSONRespHandler<Q, B, T, E>) {
+  return defineJSONHandler<Q, B, T, E>(async (req, res) => {
+    if (!req.extra) req.extra = {} as E
+    req.extra.user = await verifyAuth(req)
+    return handler(req, res)
+  })
 }
