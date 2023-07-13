@@ -25,8 +25,10 @@ export class AuthError extends HTTPError {
  * Verifies the user's JWT token and returns its payload if it's valid.
  */
 export async function verifyAuth(req: VercelRequest) {
-  const token = req.cookies[USER_TOKEN]
-    .toString()
+  const userTokenCookie = req.cookies[USER_TOKEN]?.toString() ?? ''
+  if (!userTokenCookie) throw new AuthError('Missing user token')
+
+  const token = userTokenCookie
     .replace(`${USER_TOKEN}=`, '')
     .split(';')[0]
 

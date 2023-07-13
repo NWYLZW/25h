@@ -6,12 +6,27 @@ Content-Type: application/json
   "password": "{{password}}"
 }
 
+> {%
+  client.assert(response.status === 204, 'status is 204')
+%}
+
 ###
 
 GET {{baseURL}}/counter
 
 > {%
-  client.log('counter value: ' + (/** @type {{ c: number }} */ response.body).c)
+  const body = /** @type {{ c: number }} */ response.body
+  client.log('counter value: ' + body.c)
+  client.assert(response.status === 200, 'status is 200')
+%}
+
+###
+
+# @no-cookie-jar
+GET {{baseURL}}/counter
+
+> {%
+  client.assert(response.status === 401, 'status is 200')
 %}
 
 ###
