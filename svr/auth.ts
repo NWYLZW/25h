@@ -76,7 +76,7 @@ export function expireUserCookie(res: VercelResponse) {
   res.setHeader('Set-Cookie', `${USER_TOKEN}=; Path=/; HttpOnly; Max-Age=0; SameSite=Strict`)
 }
 
-export function requireAuth<
+export function defineRequireAuthHandler<
   Q extends VercelRequestQuery,
   B = unknown,
   T = unknown,
