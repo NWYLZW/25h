@@ -6,8 +6,7 @@
     "module": "ESNext",
     "skipLibCheck": true,
 
-    /* Bundler mode */
-    "moduleResolution": "bundler",
+    "moduleResolution": "NodeNext",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
@@ -23,8 +22,5 @@
     }
   },
   "include": ["src", "svr", "api"],
-  "references": [{ "path": "./tsconfig.node.json" }],
-  "ts-node": {
-    "swc": true
-  }
+  "references": [{ "path": "./tsconfig.node.json" }]
 }

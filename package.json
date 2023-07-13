@@ -12,11 +12,11 @@
     "build": "yarn check && vite build"
   },
   "dependencies": {
+    "foxact": "^0.2.16",
     "jose": "^4.14.4",
     "nanoid": "^4.0.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "foxact": "^0.2.16",
     "sass": "^1.63.6"
   },
   "devDependencies": {
