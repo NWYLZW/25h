@@ -17,12 +17,12 @@ const messages = [
 
 export function GridFor25H({
   notNow,
-  disabled = false,
+  editable = false,
   className,
   style
 }: {
   notNow?: Date
-  disabled?: boolean
+  editable?: boolean
   className?: string
   style?: CSSProperties
 }) {
@@ -58,10 +58,10 @@ export function GridFor25H({
         + (i === hour && !notNow ? ' now' : '')
         + (cards[i]?.content?.trim() ? '' : ' empty')
       }
-      onClick={() => !disabled && setIndex(i)}
+      onClick={() => editable && setIndex(i)}
       onDragOver={e => e.preventDefault()}
       onDrop={e => {
-        if (disabled) return
+        if (!editable) return
 
         const data = JSON.parse(e.dataTransfer.getData('text'))
         if (data.type === 'tag') {
@@ -104,7 +104,7 @@ export function GridFor25H({
         + (index === hour && !notNow ? ' now' : '')
         + (index !== -1 && !cards[index]?.content?.trim() ? ' empty' : '')
       }
-      onDoubleClick={() => !disabled && setIndex(-1)}
+      onDoubleClick={() => editable && setIndex(-1)}
     >
       <img src={Close}
            alt='Close'

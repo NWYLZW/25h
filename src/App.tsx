@@ -23,6 +23,7 @@ export default function App() {
     </h1>
     <Tags />
     <GridFor25H
+      editable
       notNow={offset === 0 ? undefined : new Date(Date.now() + offset * 24 * 60 * 60 * 1000)}
       style={{ marginTop: 50 }}
     />
