@@ -1,0 +1,8 @@
+GET {{baseURL}}/agenda
+
+###
+
+POST {{baseURL}}/agenda
+
+###
+
